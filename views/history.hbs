@@ -1,0 +1,103 @@
+{{!< public_layout}}
+
+<div class="aui-page-panel">
+    <div class="aui-page-panel-inner">
+        <section class="aui-page-panel-content">
+            <div id="history" class="aui-row"></div>
+            <hr />
+            <!-- div style="margin: 40px 0; text-align: center;">
+                <p>HipChat Guest History add-on runs on servers that run on money. Support me in keeping this application up and running and continue development.</p>
+                <small><i><b>Note:</b> This team is not affiliated with HipChat Guest History add-on in any way.</i></small>
+
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="aui">
+                    <input type="hidden" name="cmd" value="_s-xclick" />
+                    <input type="hidden" name="hosted_button_id" value="T5SWNEVXHRSS8" />
+                    <input type="hidden" name="on0" value="Server" />
+
+                    <div class="field-group" style="padding: 4px 0 4px 0px">
+                        <select name="os0" class="select" id="server">
+                            <option value="Server/Day">Server/Day €5.50 EUR</option>
+                            <option value="Server/Week" selected="selected">Server/Week €11.00 EUR</option>
+                            <option value="Server/Month">Server/Month €33.00 EUR</option>
+                            <option value="Server/Year">Server/Year €155.00 EUR</option>
+                        </select>
+                    </div>
+
+                    <div class="buttons">
+                        <input class="button submit" type="submit" name="submit" value="Buy you a server" />
+                    </div>
+
+                    <input type="hidden" name="currency_code" value="EUR" />
+                    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" />
+                    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+                </form>
+
+            </div -->
+        </section>
+    </div>
+
+</div>
+
+<div style="display:none">
+    <div id="card_template" class="aui-item">
+        <div class="hc-row">
+            <div class="hc-avatar"></div>
+            <div class="hc-msg">
+                <span class="hc-from">{{this.ghFrom}}</span>
+                <span class="hc-time">{{this.ghDate}}</span>
+                <div class="hc-content">{{this.ghMessage}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    function addCard(dest, data) {
+        var cardTempl = document.getElementById("card_template");
+        var card = cardTempl.cloneNode(true);
+        card.setAttribute("id", data.id);
+
+        if (data.color) {
+            $(card).find('.hc-row').addClass('hc-row-' + data.color);
+        }
+
+        var personDiv = card.getElementsByClassName("hc-from")[0];
+        if (personDiv) {
+            personDiv.innerHTML = typeof(data.from) == "string" ? data.from : data.from.name;
+        }
+
+        var timeDiv = card.getElementsByClassName("hc-time")[0];
+        if (timeDiv) {
+            timeDiv.innerHTML = new Date(Date.parse(data.date)).toUTCString();
+        }
+
+        var messageDiv = card.getElementsByClassName("hc-content")[0];
+        if (messageDiv) {
+            if (data.message) {
+                messageDiv.innerHTML = data.message;
+            } else if (data.file) {
+                messageDiv.innerHTML = "<a href='" + data.file.url + "'>" + data.file.name + "</a>";
+            }
+        }
+
+        dest.appendChild(card);
+    }
+
+    $().ready(function() {
+        $.ajax({
+            dataType: "json",
+            url: window.location + "/latest",
+            success: function(data, status, xhr) {
+                var history = document.getElementById("history");
+                //removeCards(history);
+                for (var item in data.items) {
+                    addCard(history, data.items[item]);
+                }
+                console.log('messages loaded');
+            },
+            fail: function(data, status, xhr) {
+                console.log(data);
+            }
+        });
+    })
+</script>

@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>{{title}}</title>
+
+        <link rel="stylesheet" href="//aui-cdn.atlassian.com/aui-adg/5.9.6/css/aui.css" media="all" />
+        <link rel="stylesheet" href="{{furl '/css/public.css'}}" type="text/css"/>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script src="//aui-cdn.atlassian.com/aui-adg/5.9.6/js/aui.min.js"></script>
+        <link href="//fonts.googleapis.com/css?family=Russo+One" rel="stylesheet" type="text/css" />
+
+    </head>
+
+    <body class="aui-responsive aui-layout aui-theme-default aui-page-fixed aui-page-sidebar">
+      <section id="content" role="main">
+          <header id="header" class="aui-page-header intro-header">
+              <div class="aui-page-header-inner">
+                  <div class="aui-page-header-main">
+                      <h1 class="center">{{title}}</h1>
+                      <h2 id="subheader" class="center">{{subtitle}}</h2>
+                  </div>
+              </div>
+          </header>
+        {{{body}}}
+          <footer id="footer">
+              <section class="footer-body">
+                  <ul id="aui-footer-list">
+                      <li>Copyright © 2016 Hipchat-Guest-History</li>
+                      <li>Improving HipChat guest experience</li>
+                      <li>All rights reserved</li>
+                  </ul>
+              </section>
+          </footer>
+      </section>
+    </body>
+</html>

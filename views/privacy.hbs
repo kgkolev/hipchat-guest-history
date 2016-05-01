@@ -1,0 +1,17 @@
+{{!< public_layout}}
+
+<div class="aui-page-panel">
+    <div class="aui-page-panel-inner">
+        <section class="aui-page-panel-content">
+
+            <p>HipChat Guest History add-on stores only the following security data:</p>
+            <ul>
+                <li>Client integration id and secret - provided automatically by HipChat API and required to integrate with your group.</li>
+                <li>Room ID - to refer to when accessing room history.</li>
+                <li>Group level access token for the duration of the token lifetime (refreshed on every 1 hour). Required in order to access HipChat API data.</li>
+            </ul>
+            <p>HipChat Guest History does not store any additional information other than in-memory and pass-through data used to serve message history you have provided public access for.</p>
+            <p>HipChat Guest History protects security data (described above) by only exposing a random generated GUID for each room you enable public guest access for. Requests with this public GUID are proxied by HipChat Guest History add-on back-end servers. This ensures protection of access tokens when using HipChat APIs.</p>
+        </section>
+    </div>
+</div>

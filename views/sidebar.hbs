@@ -1,0 +1,75 @@
+{{!< layout}}
+<div class="aui-group sidebar">
+    <div class="aui-row">
+        <div class="aui-item">
+            <h3>Configure Access</h3>
+            <p>Enable history access for Guest users of this room.</p>
+            <div id="expander-with-replace-text-content" class="aui-expander-content">
+                <p>Guest users will be able to receive a card with link to the room history page. The card is sent as a greeting when joining or upon request by typing "/history".</p>
+                <p><strong>Note:</strong> the page will be accessible to everyone.</p>
+                <p>Disabling access will also invalidate the history page link.</p>
+            </div>
+            <a id="replace-text-trigger" data-replace-text="Read less" class="aui-expander-trigger" aria-controls="expander-with-replace-text-content">Read more</a>
+        </div>
+    </div>
+    <br />
+    <div class="aui-row">
+        <div class="aui-item">
+            <div class="field-group">
+                <aui-label for="toggle-gh-enable">Enable Access</aui-label>
+                <aui-toggle id="toggle-gh-enable" label="Enable Access" tooltip-on="On" tooltip-off="Off"></aui-toggle>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="aui-row">
+        <div class="aui-item">
+            <div class="field-group">
+                <aui-label for="toggle-gh-greeting">Guest Greetings</aui-label>
+                <aui-toggle id="toggle-gh-greeting" label="Guest Greetings" tooltip-on="Get a greeting card every time a guest joins." tooltip-off="Get a greeting card only when a Guest types '/history' in the chat.">
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+
+(function () {
+
+    // refresh view to keep JWT
+    window.setInterval(function () {
+        HipChat.sidebar.closeView();
+    }, 900000); // 15 min
+
+    var toggleClicked = function (postUrl) {
+        return function(e) {
+            var isChecked = e.target.checked;     // new value of the toggle
+            e.target.busy = true;
+
+            $.ajax({
+                        type: 'POST',
+                        url: postUrl,
+                        headers: {'Authorization': 'JWT {{signed_request}}'},
+                        dataType: 'json',
+                        data: {
+                            value: isChecked,
+                        }
+                    })
+                    .fail(function (data) {
+                        e.target.checked = !isChecked;
+                        console.error(data);
+                    })
+                    .always(function () {
+                        e.target.busy = false;
+                    });
+        }
+    }
+
+    $('#toggle-gh-enable').attr('checked', {{historyFlag}});
+    $('#toggle-gh-enable').on('change', toggleClicked('/config/room'));
+
+    $('#toggle-gh-greeting').attr('checked', {{greetingFlag}});
+    $('#toggle-gh-greeting').on('change', toggleClicked('/config/room/greeting'));
+})();
+
+</script>

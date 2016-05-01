@@ -1,0 +1,31 @@
+{{!< public_layout}}
+
+<div class="aui-page-panel">
+    <div class="aui-page-panel-inner">
+        <section class="aui-page-panel-content">
+            <p>This addon requires back-end servers to enable guest history functionality.
+                <br />
+                Support me in keeping this add-on free forever.</p>
+
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="aui">
+                <input type="hidden" name="cmd" value="_s-xclick" />
+                <input type="hidden" name="hosted_button_id" value="T5SWNEVXHRSS8" />
+                <input type="hidden" name="on0" value="Server" />
+                <input type="hidden" name="currency_code" value="EUR" />
+
+                <div class="field-group" style="padding: 4px 0px 4px 0px">
+                    <select name="os0" class="select" id="server">
+                        <option value="Server/Day">Server/Day €5.50 EUR</option>
+                        <option value="Server/Week" selected="selected">Server/Week €11.00 EUR</option>
+                        <option value="Server/Month">Server/Month €33.00 EUR</option>
+                        <option value="Server/Year">Server/Year €155.00 EUR</option>
+                    </select>
+                    <input class="aui-button aui-button-primary" type="submit" name="submit" value="Buy you a server" />
+                </div>
+
+                <!-- input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" />
+                <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1" / -->
+            </form>
+        </section>
+    </div>
+</div>

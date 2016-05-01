@@ -1,0 +1,55 @@
+{
+  "key": "hipchat-guest-history",
+  "name": "Guest History",
+  "description": "Provides a view on the room history for Guests",
+  "vendor": {
+    "name": "Kaloyan Kolev",
+    "url": "https://www.hipchat.com"
+  },
+  "links": {
+    "self": "{{localBaseUrl}}/atlassian-connect.json",
+    "homepage": "{{localBaseUrl}}/atlassian-connect.json"
+  },
+  "capabilities": {
+    "installable": {
+      "allowGlobal": true,
+      "allowRoom": false,
+      "callbackUrl": "{{localBaseUrl}}/installed"
+    },
+    "configurable": {
+      "url": "{{localBaseUrl}}/config"
+    },
+    "hipchatApiConsumer": {
+      "scopes": [
+        "view_messages",
+        "send_notification",
+        "view_group",
+        "admin_room"
+      ]
+    },
+    "glance": [
+      {
+        "name": {
+          "value": "Guest History"
+        },
+        "queryUrl": "{{localBaseUrl}}/glance",
+        "key": "guest-history-glance",
+        "target": "guest-history-sidebar",
+        "icon": {
+          "url": "{{localBaseUrl}}/img/History-transparent-128.png",
+          "url@2x": "{{localBaseUrl}}/img/History-transparent-128.png"
+        }
+      }
+    ],
+    "webPanel": [
+      {
+        "key": "guest-history-sidebar",
+        "name": {
+          "value": "Guest History Configurator"
+        },
+        "location": "hipchat.sidebar.right",
+        "url": "{{localBaseUrl}}/sidebar"
+      }
+    ]
+  }
+}
